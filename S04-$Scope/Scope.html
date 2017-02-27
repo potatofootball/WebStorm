@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div ng-app="app" ng-controller="MyController">
+    {{test}}<br/>{{name}}
+</div>
+</body>
+<script src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module('app', []);
+    app.controller('MyController', function ($scope, $rootScope) {
+        $rootScope.test = "test";
+        $rootScope.name = "root";
+        $scope.name = "leaf"
+    })
+</script>
+</html>

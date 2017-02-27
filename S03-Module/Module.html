@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div ng-app="app1" ng-controller="MyController">
+    {{name}}
+</div>
+<div ng-app="app2" ng-controller="myController">
+    {{name}}
+</div>
+</body>
+<script src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var app1 = angular.module('app1', []);
+    app1.controller('MyController', function ($scope) {
+        $scope.name = "xxg";
+    })
+    var app2 = angular.module('app2', []);
+    app2.controller('myController', function ($scope) {
+        $scope.name = "xxg";
+    })
+</script>
+</html>

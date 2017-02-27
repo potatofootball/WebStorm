@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="app" ng-controller="pController">
+<div ng-controller="cController">
+    <button ng-click="age(1)" >年龄+1</button>
+</div>
+<p ng-bind="person | json"></p>
+</body>
+<script src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+        .controller('pController', function ($scope) {
+            $scope.person = {age : 1};
+        })
+        .controller('cController', function ($scope) {
+            $scope.age = function (num) {
+                $scope.person.age += num;
+            }
+        })
+</script>
+</html>

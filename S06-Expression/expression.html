@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="app">
+<div ng-controller="pController">
+        <input ng-model="to" type="email" placeholder="Recipient" />
+        <textarea ng-model="emailBody"></textarea>
+        <div id="emailPreview">
+            <pre>{{ previewText }}</pre>
+        </div>
+    </div>
+</body>
+<script src="../js/angular-1.6.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', ['emailParser'])
+        .controller('pController', ['$scope', 'EmailParser', function($scope, EmailParser) {
+            $scope.to = 'ari@fullstack.io';
+            $scope.emailBody = 'Hello {{to}}';
+            // Set up a watch
+            $scope.$watch('emailBody', function(body) {
+                if (body) {
+                    $scope.previewText =
+                        EmailParser.parse(body, {
+                            to: $scope.to
+                        });
+                }
+            });
+        }]);
+
+    angular.module('emailParser', [])
+        .config(['$interpolateProvider', function($interpolateProvider) {
+//            $interpolateProvider.endSymbol('__');
+        }])
+        .factory('EmailParser', ['$interpolate', function($interpolate) {
+            // a service to handle parsing
+            return {
+                parse: function(text, context) {
+                    var template = $interpolate(text);
+                    return template(context);
+                }
+            };
+        }]);
+</script>
+</html>

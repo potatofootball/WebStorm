@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="app">
+<div ng-controller="MyController">
+    <!--过滤时间-->
+    <p>{{ money | currency : moneyType : 5}}</p>
+    <p ng-bind="today"></p>
+    <!--过滤数组-->
+    <p>{{ [1,2,3] | filter : 2}}</p>
+    <p>{{person | filter : {'name' : 'a'} }}</p>
+    <p>{{person | filter : {$ : 'a'} }}</p>
+    <p>{{"fgd" | number}}</p>
+</div>
+</body>
+<script src="js/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module('app', []);
+    app.controller('MyController', function ($scope, $filter) {
+        // 过滤器格式化时间
+//        $scope.today = new Date();
+        $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd hh:mm:ss');
+        // 过滤对象数组
+        $scope.person = [{'name' : 'a', 'age' : 10}, {'name' : 'b', 'age' : 'a'}];
+        $scope.money = 1213;
+        $scope.moneyType = "rmb ";
+    })
+</script>
+</html>

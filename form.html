@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body ng-app="testApp">
+<div ng-controller="mycontroller">
+    <table border="2px">
+        <thead>登陆</thead>
+        <tbody>
+        <tr>
+            <td>账户</td>
+            <td>
+                <input type="text" ng-model="user.username">
+            </td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>
+                <input type="password" ng-model="user.password">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" ng-click="checkUser()"></td>
+        </tr>
+        <tr ng-if="msg.length > 0">
+            <td align="center" colspan="2"><p ng-bind="msg"></p></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="js/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('testApp', [])
+        .controller('mycontroller', function ($scope) {
+            $scope.user = {username : "", password : ""};
+            $scope.msg = "";
+            $scope.checkUser = function () {
+                if ($scope.user.username == "xxg" && $scope.user.password == "123") {
+                    $scope.msg = "登陆成功";
+                } else {
+                    $scope.msg = "账户或密码错误";
+                }
+            }
+
+        })
+</script>
+</html>
